@@ -15,7 +15,7 @@ Here is a basic block diagram of what I expect the project to look like and what
                                  +----------+----------+
                                             |
                            +----------------+-----------------+
-                           |                                  X
+                           |                                  |
                 +----------v----------+           +----------v----------+
                 |       Board         |           |   StockfishEngine  |
                 +----------+----------+           +---------------------+
