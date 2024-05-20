@@ -39,7 +39,7 @@ public class ChessGameController {
         this.executor = Executors.newSingleThreadExecutor(); // Sets up and executor to handle the chess engine move
         try { 
         	// Initialize the Stockfish chess engine with the path to the executable
-            this.stockfishEngine = new StockfishEngine("G:\\Documents\\School work\\CISC 191 - JAVA 2\\FuturamaChess\\stockfish\\stockfish\\stockfish-windows-x86-64-sse41-popcnt.exe");
+            this.stockfishEngine = new StockfishEngine("./stockfish/stockfish/stockfish-windows-x86-64-sse41-popcnt.exe"); // Creates instance of chess engine from local directory
         } catch (IOException e) {
             e.printStackTrace(); // Print any errors that occur during initialization
         }
