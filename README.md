@@ -15,13 +15,13 @@ Version 0.75 // Code created and stored on local machine in April, 2024
 
 Version 0.95 // Code created and stored on local machine in May, 2024
 // Stockfish successfully implemented into the game, single player works correctly
-// Game functions as intended with room for some improvements
+// Game functions as intended with some room for improvements
 
 possible future feature implementation:
-- correcting chess engine GUI functionality for castling
-- correcting chess engine functionality for loaded games (will be difficult to implement since the move list array will have to be passed into a loaded game somehow)
-- Change the terminal output for selected square to match normal chess syntex (lettered rows, numbered columns)
+- correcting chess engine GUI functionality for castling in both cases (short & long castling)
+- correcting chess engine functionality for loaded games (will be difficult to implement since the move list array from the loaded game will have to be passed into the running program to update expected location of pieces from default)
+- Change the terminal output for selected square to match standard chess syntex (lettered rows, numbered columns) 
 
 
 
-- simplifying the 'handleButtonClick' method
+- simplify the 'handleButtonClick' method
