@@ -1,10 +1,9 @@
 package board;
 
 import pieces.Piece;
-import java.io.Serializable;
 
-public class Square implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Square {
+
     private int x, y;
     private Piece piece;
 

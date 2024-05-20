@@ -1,10 +1,9 @@
 package pieces;
 
 import board.*;
-import java.io.Serializable;
 
-public class Bishop extends Piece implements Serializable {
-    private static final long serialVersionUID = 1L;
+@SuppressWarnings("serial")
+public class Bishop extends Piece {
 
     public Bishop(String color) {
         super(color);

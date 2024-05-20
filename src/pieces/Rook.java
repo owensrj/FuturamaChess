@@ -2,10 +2,8 @@ package pieces;
 
 import board.Board;
 import board.Square;
-import java.io.Serializable;
 
-public class Rook extends Piece implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Rook extends Piece {
 
     public Rook(String color) {
         super(color);

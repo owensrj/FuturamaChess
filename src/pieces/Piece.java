@@ -5,10 +5,8 @@ import board.Square;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
-public abstract class Piece implements Serializable {
-    private static final long serialVersionUID = 1L;
+public abstract class Piece {
     private String color;
 
     public Piece(String color) {

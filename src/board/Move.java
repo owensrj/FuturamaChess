@@ -1,9 +1,7 @@
 package board;
 
-import java.io.Serializable;
+public class Move {
 
-public class Move implements Serializable {
-    private static final long serialVersionUID = 1L;
     private final Square start;
     private final Square end;
 

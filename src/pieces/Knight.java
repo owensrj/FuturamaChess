@@ -1,10 +1,10 @@
 package pieces;
 
 import board.*;
-import java.io.Serializable;
 
-public class Knight extends Piece implements Serializable {
-    private static final long serialVersionUID = 1L;
+
+@SuppressWarnings("serial")
+public class Knight extends Piece {
 
     public Knight(String color) {
         super(color);

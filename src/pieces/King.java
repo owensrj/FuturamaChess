@@ -1,10 +1,8 @@
 package pieces;
 
 import board.*;
-import java.io.Serializable;
 
-public class King extends Piece implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class King extends Piece {
 
     public King(String color) {
         super(color);

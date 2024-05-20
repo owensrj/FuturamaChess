@@ -2,12 +2,11 @@ package board;
 
 import pieces.*;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Board{
+
     private Square[][] squares;
 
     public Board() {

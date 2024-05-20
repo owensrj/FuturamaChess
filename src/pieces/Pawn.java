@@ -1,10 +1,10 @@
 package pieces;
 
 import board.*;
-import java.io.Serializable;
 
-public class Pawn extends Piece implements Serializable {
-    private static final long serialVersionUID = 1L;
+@SuppressWarnings("serial")
+public class Pawn extends Piece {
+
     private boolean hasMoved;
 
     public Pawn(String color) {
