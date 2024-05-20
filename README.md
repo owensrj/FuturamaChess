@@ -4,32 +4,4 @@
 
 // My goal with this chess engine is to transform it to a Futurama-themed Chess GUI with character pieces that features not only local multiplayer, but single player functionality with a chess engine. In addition to adding graphics and integrating a chess engine API that will require multi-threading, I will add a feature to save and load the game to demonstrate file I/O proficiency.
 
-Here is a basic block diagram of what I expect the project to look like and what classes need to be written:
-
-                                 +---------------------+
-                                 | ChessGameController |  /* Handles rules of chess
-                                 +----------+----------+
-                                            |
-                                 +----------v----------+
-                                 |   ChessGameView     |  /* Handles the GUI components of the chess game (
-                                 +----------+----------+
-                                            |
-                           +----------------+-----------------+
-                           |                                  |
-                +----------v----------+           +----------v----------+
-                |       Board         |           |   StockfishEngine  |
-                +----------+----------+           +---------------------+
-                           |
-          +----------------+----------------+
-          |         (most logic here        |
-          |          is complete )          |
- +--------v--------+               +-------v-------+
- |      Square     |               |     Piece     |
- +--------+--------+               +-------+-------+
-          |                                |
-          |                        +-------+-------+
-          |                        |   Subclasses  |
-          |                        |  (Pawn, etc.) |
-          |                        +---------------+
-          |
-          +-> Contains a Piece
+See the Drawio file for a basic block diagram of what I expect the final program class structure to look like
