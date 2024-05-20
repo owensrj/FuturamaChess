@@ -1,63 +1,44 @@
 package ai;
 
-import java.io.*;
-
-import javax.swing.JOptionPane;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 public class StockfishEngine {
+
     private Process stockfishProcess;
     private BufferedReader reader;
-    private BufferedWriter writer;
+    private PrintWriter writer;
 
-    public StockfishEngine(String pathToStockfish) {
-        try {
-            stockfishProcess = new ProcessBuilder(pathToStockfish).start();
-            reader = new BufferedReader(new InputStreamReader(stockfishProcess.getInputStream()));
-            writer = new BufferedWriter(new OutputStreamWriter(stockfishProcess.getOutputStream()));
-        } catch (IOException e) {
-            showError("Error starting Stockfish engine: " + e.getMessage());
-        }
+    public StockfishEngine(String stockfishPath) throws IOException {
+        ProcessBuilder processBuilder = new ProcessBuilder(stockfishPath);
+        stockfishProcess = processBuilder.start();
+        reader = new BufferedReader(new InputStreamReader(stockfishProcess.getInputStream()));
+        writer = new PrintWriter(stockfishProcess.getOutputStream(), true);
     }
 
-    public String getBestMove(String fen, int difficulty) {
-        try {
-            sendCommand("uci");
-            sendCommand("setoption name Skill Level value " + difficulty);
-            sendCommand("position fen " + fen);
-            sendCommand("go movetime 2000"); // Adjust movetime as needed
-            
-            String bestMove = null;
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("bestmove")) {
-                    bestMove = line.split(" ")[1];
-                    break;
-                }
+    public String sendCommand(String command) throws IOException {
+        writer.println(command);
+        writer.flush();
+        return reader.readLine();
+    }
+
+    public String getBestMove(String fen) throws IOException {
+        sendCommand("position fen " + fen);
+        sendCommand("go movetime 2000");  // Adjust the time as needed
+        String response;
+        while ((response = reader.readLine()) != null) {
+            if (response.startsWith("bestmove")) {
+                return response.split(" ")[1];
             }
-            return bestMove;
-        } catch (IOException e) {
-            showError("Error communicating with Stockfish: " + e.getMessage());
         }
         return null;
     }
 
-    private void sendCommand(String command) throws IOException {
-        writer.write(command + "\n");
-        writer.flush();
-    }
-
-    private void showError(String message) {
-        JOptionPane.showMessageDialog(null, message);
-    }
-
-    public void close() {
-        try {
-            sendCommand("quit");
-            stockfishProcess.destroy();
-            reader.close();
-            writer.close();
-        } catch (IOException e) {
-            showError("Error closing Stockfish engine: " + e.getMessage());
-        }
+    public void close() throws IOException {
+        sendCommand("quit");
+        reader.close();
+        writer.close();
     }
 }
