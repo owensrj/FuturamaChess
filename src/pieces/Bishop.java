@@ -1,7 +1,6 @@
 package pieces;
 
-import board.Board;
-import board.Square;
+import board.*;
 import java.io.Serializable;
 
 public class Bishop extends Piece implements Serializable {
