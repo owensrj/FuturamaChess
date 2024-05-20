@@ -72,18 +72,24 @@ public class ChessGameController {
             if (piece != null) {
                 System.out.println("Attempting to move piece: " + piece + " from " + selectedSquare + " to " + clickedSquare);
                 if (piece.movePiece(selectedSquare, clickedSquare, model)) {
-                    System.out.println("Move validated for piece: " + piece);
-                    moveHistory.add(new Move(selectedSquare, clickedSquare));
-                    clickedSquare.setPiece(piece);
-                    selectedSquare.setPiece(null);
-                    selectedSquare = null;
-                    currentPlayer = currentPlayer.equals("White") ? "Black" : "White";
-                    view.updateStatusLabel("Current turn: " + currentPlayer);
-                    view.updateBoard(model);
-                    if (isGameOver()) {
-                        view.updateStatusLabel("Game Over! Winner: " + currentPlayer);
-                    } else if (isSinglePlayer && currentPlayer.equals("Black")) {
-                        executor.submit(this::performAIMove);
+                    Piece targetPiece = clickedSquare.getPiece();
+                    if (targetPiece == null || !targetPiece.getColor().equals(piece.getColor())) {
+                        System.out.println("Move validated for piece: " + piece);
+                        moveHistory.add(new Move(selectedSquare, clickedSquare));
+                        clickedSquare.setPiece(piece);
+                        selectedSquare.setPiece(null);
+                        selectedSquare = null;
+                        currentPlayer = currentPlayer.equals("White") ? "Black" : "White";
+                        view.updateStatusLabel("Current turn: " + currentPlayer);
+                        view.updateBoard(model);
+                        if (isGameOver()) {
+                            view.updateStatusLabel("Game Over! Winner: " + currentPlayer);
+                        } else if (isSinglePlayer && currentPlayer.equals("Black")) {
+                            executor.submit(this::performAIMove);
+                        }
+                    } else {
+                        System.out.println("Invalid move: Cannot capture your own piece.");
+                        selectedSquare = null;
                     }
                 } else {
                     System.out.println("Invalid move for piece: " + piece);
@@ -94,10 +100,10 @@ public class ChessGameController {
     }
 
     private void performAIMove() {
-        String fen = getFENFromBoard();
-        System.out.println("Generated FEN: " + fen);
+        String moveList = getMoveList();
+        System.out.println("Generated Move List: " + moveList);
         try {
-            String bestMove = stockfishEngine.getBestMove(fen);
+            String bestMove = stockfishEngine.getBestMove(moveList);
             if (bestMove != null) {
                 SwingUtilities.invokeLater(() -> {
                     applyAIMove(bestMove);
@@ -108,6 +114,8 @@ public class ChessGameController {
                     }
                     view.updateBoard(model);
                 });
+            } else {
+                System.out.println("No best move found by Stockfish.");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -128,35 +136,17 @@ public class ChessGameController {
             moveHistory.add(new Move(start, end));
             end.setPiece(piece);
             start.setPiece(null);
+        } else {
+            System.out.println("Error: Piece not found at starting square.");
         }
     }
 
-    private String getFENFromBoard() {
-        StringBuilder fen = new StringBuilder();
-        for (int i = 0; i < 8; i++) {
-            int emptyCount = 0;
-            for (int j = 0; j < 8; j++) {
-                Piece piece = model.getSquare(j, i).getPiece();
-                if (piece == null) {
-                    emptyCount++;
-                } else {
-                    if (emptyCount > 0) {
-                        fen.append(emptyCount);
-                        emptyCount = 0;
-                    }
-                    fen.append(piece.toString().toLowerCase());
-                }
-            }
-            if (emptyCount > 0) {
-                fen.append(emptyCount);
-            }
-            if (i < 7) {
-                fen.append("/");
-            }
+    private String getMoveList() {
+        StringBuilder moveList = new StringBuilder();
+        for (Move move : moveHistory) {
+            moveList.append(move.getUCIString()).append(" ");
         }
-        fen.append(" ").append(currentPlayer.equals("White") ? "w" : "b");
-        // Additional FEN details can be appended as needed
-        return fen.toString();
+        return moveList.toString().trim();
     }
 
     public boolean isGameOver() {

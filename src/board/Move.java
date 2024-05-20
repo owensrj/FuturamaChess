@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class Move implements Serializable {
     private static final long serialVersionUID = 1L;
-    private final Square start, end;
+    private final Square start;
+    private final Square end;
 
     public Move(Square start, Square end) {
         this.start = start;
@@ -33,5 +34,20 @@ public class Move implements Serializable {
 
     public int getEndY() {
         return end.getY();
+    }
+
+    public String getUCIString() {
+        return squareToUCI(start) + squareToUCI(end);
+    }
+
+    private String squareToUCI(Square square) {
+        char file = (char) ('a' + square.getX());
+        int rank = 8 - square.getY();
+        return "" + file + rank;
+    }
+
+    @Override
+    public String toString() {
+        return "Move from " + start + " to " + end;
     }
 }

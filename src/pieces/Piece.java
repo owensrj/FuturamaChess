@@ -32,8 +32,14 @@ public abstract class Piece implements Serializable {
         int endX = end.getX();
         int endY = end.getY();
 
+        Piece endPiece = board.getSquare(endX, endY).getPiece();
+        if (endPiece != null && endPiece.getColor() == this.getColor()) {
+            // If the piece at the end square is of the same color, path is not clear
+            return false;
+        }
+
         if (this instanceof Knight) {
-            return true;
+            return true; // Knights jump over pieces, so path check is irrelevant
         }
 
         int stepX = Integer.compare(endX, startX);
@@ -44,13 +50,13 @@ public abstract class Piece implements Serializable {
 
         while (currentX != endX || currentY != endY) {
             if (board.getSquare(currentX, currentY).getPiece() != null) {
-                return false;
+                return false; // There is a piece blocking the path
             }
             currentX += stepX;
             currentY += stepY;
         }
 
-        return true;
+        return true; // Path is clear
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {
