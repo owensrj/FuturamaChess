@@ -26,29 +26,62 @@ public abstract class Piece implements Serializable {
 		return color.charAt(0) + "";
 	}
 
-	public boolean isPathClear(Square start, Square end, Board board) {
-		int startX = start.getX();
-		int startY = start.getY();
-		int endX = end.getX();
-		int endY = end.getY();
-
-		Piece endPiece = board.getSquare(endX, endY).getPiece();
-		if (endPiece != null && endPiece.getColor() == this.getColor()) {
-			// If the piece at the end square is of the same color, path is not clear
-			return false;
+	public boolean isMovePathClear(Square start, Square end, Board board) {
+		if (isSameColorPieceAtDestination(start, end, board)) {
+			return false; // Path is not clear if there is a same color piece at the end
 		}
 
 		if (this instanceof Knight) {
 			return true; // Knights jump over pieces, so path check is irrelevant
 		}
 
-		int stepX = Integer.compare(endX, startX);
-		int stepY = Integer.compare(endY, startY);
+		int stepX = calculateStepIncrement(start.getX(), end.getX());
+		int stepY = calculateStepIncrement(start.getY(), end.getY());
 
-		int currentX = startX + stepX;
-		int currentY = startY + stepY;
+		return checkPathForObstructions(start, end, board, stepX, stepY);
+	}
 
-		while (currentX != endX || currentY != endY) {
+	/**
+	 * Checks if there is a piece of the same color at the end square.
+	 *
+	 * @param start The starting square.
+	 * @param end   The ending square.
+	 * @param board The board.
+	 * @return true if there is a same color piece at the end square, false
+	 *         otherwise.
+	 */
+	private boolean isSameColorPieceAtDestination(Square start, Square end, Board board) {
+		Piece endPiece = board.getSquare(end.getX(), end.getY()).getPiece();
+		return endPiece != null && endPiece.getColor() == this.getColor();
+	}
+
+	/**
+	 * Calculates the step increment for traversal.
+	 *
+	 * @param start The starting coordinate.
+	 * @param end   The ending coordinate.
+	 * @return The step increment.
+	 */
+	private int calculateStepIncrement(int start, int end) {
+		return Integer.compare(end, start);
+	}
+
+	/**
+	 * Checks if the path between the start and end squares is clear of
+	 * obstructions.
+	 *
+	 * @param start The starting square.
+	 * @param end   The ending square.
+	 * @param board The board.
+	 * @param stepX The step increment for the x-coordinate.
+	 * @param stepY The step increment for the y-coordinate.
+	 * @return true if the path is unobstructed, false otherwise.
+	 */
+	private boolean checkPathForObstructions(Square start, Square end, Board board, int stepX, int stepY) {
+		int currentX = start.getX() + stepX;
+		int currentY = start.getY() + stepY;
+
+		while (currentX != end.getX() || currentY != end.getY()) {
 			if (board.getSquare(currentX, currentY).getPiece() != null) {
 				return false; // There is a piece blocking the path
 			}

@@ -17,7 +17,7 @@ public class Bishop extends Piece {
 	@Override
 	public boolean movePiece(Square start, Square end, Board board) {
 		return Math.abs(start.getX() - end.getX()) == Math.abs(start.getY() - end.getY())
-				&& isPathClear(start, end, board);
+				&& isMovePathClear(start, end, board);
 	}
 
 	@Override

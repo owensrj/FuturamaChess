@@ -16,7 +16,6 @@ public class Pawn extends Piece {
 		this("White"); // Provide a default color or handle as needed
 	}
 
-	@Override
 	public boolean movePiece(Square start, Square end, Board board) {
 		int yDiff = getColor().equals("White") ? start.getY() - end.getY() : end.getY() - start.getY();
 		int xDiff = Math.abs(start.getX() - end.getX());
@@ -34,7 +33,6 @@ public class Pawn extends Piece {
 		return false;
 	}
 
-	@Override
 	public String toString() {
 		return super.toString() + "P";
 	}
