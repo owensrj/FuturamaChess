@@ -80,51 +80,99 @@ public class ChessGameController {
      * @param y The y-coordinate of the clicked square (row).
      */
     public void handleButtonClick(int x, int y) {
-        System.out.println("Button clicked at: " + x + ", " + y); // Log which button was clicked
-        Square clickedSquare = model.getSquare(x, y);			  // Retrieve the square that was clicked
+        // Log which button was clicked
+        System.out.println("Button clicked at: " + x + ", " + y);
         
-     // Check if a square is already selected to attempt a move
+        // Retrieve the square that was clicked
+        Square clickedSquare = model.getSquare(x, y);
+
         if (selectedSquare == null) {
-        	// No square is selected yet, try to select the square if it has a piece of the current player's color
-            if (clickedSquare.getPiece() != null && clickedSquare.getPiece().getColor().equals(currentPlayer)) {
-                selectedSquare = clickedSquare;
-                System.out.println("Selected piece: " + selectedSquare.getPiece() + " at " + x + ", " + y);
-            } else {
-                System.out.println("No piece selected or wrong player's piece.");
-            }
+            // No square is selected yet, attempt to select the clicked square
+            handleSquareSelection(clickedSquare);
         } else {
-        	// A square is selected, and the player is attempting to move a piece
-            Piece piece = selectedSquare.getPiece();
-            if (piece != null) {
-            	// The move is valid
-                System.out.println("Attempting to move piece: " + piece + " from " + selectedSquare + " to " + clickedSquare);  // Record the move
-                if (piece.movePiece(selectedSquare, clickedSquare, model)) {
-                    Piece targetPiece = clickedSquare.getPiece();
-                    if (targetPiece == null || !targetPiece.getColor().equals(piece.getColor())) {
-                        System.out.println("Move validated for piece: " + piece);
-                        moveHistory.add(new Move(selectedSquare, clickedSquare));
-                        clickedSquare.setPiece(piece);
-                        selectedSquare.setPiece(null);
-                        selectedSquare = null;
-                        currentPlayer = currentPlayer.equals("White") ? "Black" : "White";
-                        view.updateStatusLabel("Current turn: " + currentPlayer);
-                        view.updateBoard(model);
-                        if (isGameOver()) {
-                            view.updateStatusLabel("Game Over! Winner: " + currentPlayer);
-                        } else if (isSinglePlayer && currentPlayer.equals("Black")) {
-                            executor.submit(this::performAIMove);
-                        }
-                    } else {
-                        System.out.println("Invalid move: Cannot capture your own piece.");
-                        selectedSquare = null;
-                    }
-                } else {
-                    System.out.println("Invalid move for piece: " + piece);
-                    selectedSquare = null;
-                }
+            // A square is selected, attempt to move the piece
+            handlePieceMovement(clickedSquare);
+        }
+    }
+
+    /**
+     * Handles the logic for selecting a square.
+     * Ensures the selected square contains a piece of the current player's color.
+     *
+     * @param clickedSquare The square that was clicked.
+     */
+    private void handleSquareSelection(Square clickedSquare) {
+        Piece piece = clickedSquare.getPiece();
+        if (piece != null && piece.getColor().equals(currentPlayer)) {
+            selectedSquare = clickedSquare;
+            System.out.println("Selected piece: " + selectedSquare.getPiece() + " at " + selectedSquare.getX() + ", " + selectedSquare.getY());
+        } else {
+            System.out.println("No piece selected or wrong player's piece.");
+        }
+    }
+
+    /**
+     * Handles the process of attempting to move a piece.
+     * Validates and executes the move if valid.
+     *
+     * @param clickedSquare The square to which the piece is being moved.
+     */
+    private void handlePieceMovement(Square clickedSquare) {
+        Piece piece = selectedSquare.getPiece();
+        if (piece != null) {
+            System.out.println("Attempting to move piece: " + piece + " from " + selectedSquare + " to " + clickedSquare);
+            if (piece.movePiece(selectedSquare, clickedSquare, model)) {
+                validateAndExecuteMove(clickedSquare, piece);
+            } else {
+                System.out.println("Invalid move for piece: " + piece);
+                selectedSquare = null; // Deselect if the move is invalid
             }
         }
     }
+
+    /**
+     * Validates the move and executes it if valid.
+     * Updates the move history, switches the player, and checks the game status.
+     *
+     * @param clickedSquare The square to which the piece is being moved.
+     * @param piece         The piece being moved.
+     */
+    private void validateAndExecuteMove(Square clickedSquare, Piece piece) {
+        Piece targetPiece = clickedSquare.getPiece();
+        if (targetPiece == null || !targetPiece.getColor().equals(piece.getColor())) {
+            System.out.println("Move validated for piece: " + piece);
+            moveHistory.add(new Move(selectedSquare, clickedSquare));
+            clickedSquare.setPiece(piece);          // Move piece to new square
+            selectedSquare.setPiece(null);          // Clear the previous square
+            selectedSquare = null;                  // Deselect the square
+            switchPlayer();                         // Switch the current player
+            view.updateBoard(model);                // Update the board view
+            checkGameStatus();                      // Check if the game is over
+        } else {
+            System.out.println("Invalid move: Cannot capture your own piece.");
+            selectedSquare = null; // Deselect if the move is invalid
+        }
+    }
+
+    /**
+     * Switches the current player and updates the status label.
+     */
+    private void switchPlayer() {
+        currentPlayer = currentPlayer.equals("White") ? "Black" : "White";
+        view.updateStatusLabel("Current turn: " + currentPlayer);
+    }
+
+    /**
+     * Checks if the game is over or if the AI needs to make a move in single-player mode.
+     */
+    private void checkGameStatus() {
+        if (isGameOver()) {
+            view.updateStatusLabel("Game Over! Winner: " + currentPlayer);
+        } else if (isSinglePlayer && currentPlayer.equals("Black")) {
+            executor.submit(this::performAIMove);
+        }
+    }
+
     
     /**
      * Executes the AI's best move in a background thread.
