@@ -21,7 +21,7 @@ public class ChessGameView {
     private Map<String, ImageIcon> pieceImages;
 
     public ChessGameView() {
-        frame = new JFrame("Chess Game");
+        frame = new JFrame("Futurama Chess");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         
@@ -49,19 +49,6 @@ public class ChessGameView {
         loadButton = new JButton("Load Game");
         controlPanel.add(saveButton);
         controlPanel.add(loadButton);
-
-        JMenuBar menuBar = new JMenuBar();
-        JMenu modeMenu = new JMenu("Game Mode");
-        JMenuItem singlePlayerItem = new JMenuItem("Single Player");
-        JMenuItem twoPlayerItem = new JMenuItem("Two Player");
-
-        singlePlayerItem.addActionListener(e -> controller.setSinglePlayerMode());
-        twoPlayerItem.addActionListener(e -> controller.setTwoPlayerMode());
-
-        modeMenu.add(singlePlayerItem);
-        modeMenu.add(twoPlayerItem);
-        menuBar.add(modeMenu);
-        frame.setJMenuBar(menuBar);
 
         frame.add(controlPanel, BorderLayout.NORTH);
         frame.pack();

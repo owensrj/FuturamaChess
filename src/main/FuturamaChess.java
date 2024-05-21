@@ -11,9 +11,7 @@ import javax.swing.JOptionPane;
  */
 public class FuturamaChess {
     public static void main(String[] args) {
-        // Prompt for game mode
-      
-    	
+        // Prompt for game mode	
     	String[] options = {"Single Player", "Two Player"};
         int selection = JOptionPane.showOptionDialog(null,
                 "Select Game Mode",
