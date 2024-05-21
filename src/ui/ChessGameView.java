@@ -83,7 +83,7 @@ public class ChessGameView {
 	}
 
 	/**
-	 * Initializes the status label.
+	 * Initializes the turn status label.
 	 */
 	private void initializeStatusLabel() {
 		statusLabel = new JLabel("Current turn: White");
