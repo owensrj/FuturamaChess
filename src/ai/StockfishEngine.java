@@ -39,7 +39,7 @@ public class StockfishEngine {
 
     public String getBestMove(String moveList) throws IOException {
         sendCommand("position startpos moves " + moveList);
-        sendCommand("go movetime 2000");
+        sendCommand("go movetime 1000");
         return waitForBestMove();
     }
 
