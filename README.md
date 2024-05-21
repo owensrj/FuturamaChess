@@ -22,6 +22,3 @@ possible future feature implementation:
 - correcting chess engine functionality for loaded games (will be difficult to implement since the move list array from the loaded game will have to be passed into the running program to update expected location of pieces from default)
 - Change the terminal output for selected square to match standard chess syntex (lettered rows, numbered columns) 
 
-
-
-- simplify the 'handleButtonClick' method
