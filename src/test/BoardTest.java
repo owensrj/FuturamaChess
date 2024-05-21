@@ -44,9 +44,8 @@ class BoardTest {
         Move move = new Move(startSquare, endSquare);
         board.applyMove(move);
 
-        System.out.println("testPawnMoveForward - Start: " + startSquare + ", End: " + endSquare);
-        assertNull(startSquare.getPiece(), "Start square should be empty");
-        assertEquals(pawn, endSquare.getPiece(), "End square should have the pawn");
+        assertNull(startSquare.getPiece());
+        assertEquals(pawn, endSquare.getPiece());
     }
 
     @Test
@@ -60,9 +59,8 @@ class BoardTest {
         Move move = new Move(startSquare, endSquare);
         board.applyMove(move);
 
-        System.out.println("testPawnInitialTwoSquareMove - Start: " + startSquare + ", End: " + endSquare);
-        assertNull(startSquare.getPiece(), "Start square should be empty");
-        assertEquals(pawn, endSquare.getPiece(), "End square should have the pawn");
+        assertNull(startSquare.getPiece());
+        assertEquals(pawn, endSquare.getPiece());
     }
 
     @Test
@@ -76,8 +74,7 @@ class BoardTest {
         Move move = new Move(startSquare, endSquare);
         board.applyMove(move);
 
-        System.out.println("testKnightMove - Start: " + startSquare + ", End: " + endSquare);
-        assertNull(startSquare.getPiece(), "Start square should be empty");
-        assertEquals(knight, endSquare.getPiece(), "End square should have the knight");
+        assertNull(startSquare.getPiece());
+        assertEquals(knight, endSquare.getPiece());
     }
 }
