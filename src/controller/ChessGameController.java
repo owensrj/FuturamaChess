@@ -59,7 +59,14 @@ public class ChessGameController {
 		view.setButtonListener(this::handleButtonClick); // Set up the listener for button clicks
 		view.updateStatusLabel("Current turn: " + currentPlayer); // Display whose turn it is
 		view.setSaveButtonListener(e -> saveGame()); // Set up the listener for the save game button
-		view.setLoadButtonListener(e -> loadGame()); // Set up the listener for the load game button
+		view.setLoadButtonListener(e -> {
+			try {		
+				loadGame();		// Try to load game
+			} catch (ClassNotFoundException | IOException e1) {
+				// Catches exceptions for file IO errors or missing class file
+				e1.printStackTrace();
+			}
+		}); // Set up the listener for the load game button
 	}
 
 	/**
@@ -288,8 +295,10 @@ public class ChessGameController {
 
 	/**
 	 * Loads a game state from a file.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public void loadGame() {
+	public void loadGame() throws ClassNotFoundException, IOException {
 		// Deserialize the game state from the file
 		if (deserializeGameState()) {
 			// Apply the deserialized moves to the game model
@@ -309,7 +318,6 @@ public class ChessGameController {
 	 * 
 	 * @return true if deserialization was successful, false otherwise.
 	 */
-	
 	@SuppressWarnings("unchecked")
 	private boolean deserializeGameState() throws IOException, ClassNotFoundException {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("chessgame_moves.sav"))) {
@@ -323,7 +331,7 @@ public class ChessGameController {
 	}
 
 	/**
-	 * Applies the decrypted moves to the game model.
+	 * Applies the deserialized moves to the game model.
 	 */
 	private void applyMovesToModel() {
 		model = new Board();
