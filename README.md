@@ -36,7 +36,7 @@ Version 0.95 // Code created and stored on local machine in May, 2024
 Screenshot of my starting point - Very basic GUI developed during Intro To java that lacked many features, including animated chess pieces:
 ![ChessStartingpoint](https://github.com/owensrj/FuturamaChess/assets/143543407/f352b94d-4e62-47b8-be73-4077c2a3a3f1)
 
-Futurama Chess board after implementing characters by creating a hash map that converted the string representation into an image, and then associating the piece key of the image file to the piece I wanted to replace:
+Futurama Chess board after implementing characters by creating a hash map to associate the string representation to a picture object:
 ![futuramachess](https://github.com/owensrj/FuturamaChess/assets/143543407/2e5b12d2-a3db-45e4-8976-4a00a49311c4)
 
 Save game pop-up window implemented:
