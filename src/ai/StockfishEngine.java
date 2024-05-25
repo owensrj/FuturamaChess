@@ -29,7 +29,7 @@ public class StockfishEngine {
 		ProcessBuilder processBuilder = new ProcessBuilder(stockfishPath);
 		stockfishProcess = processBuilder.start();
 		reader = new BufferedReader(new InputStreamReader(stockfishProcess.getInputStream()));
-		writer = new PrintWriter(stockfishProcess.getOutputStream(), true);
+		writer = new PrintWriter(stockfishProcess.getOutputStream());
 		executor = Executors.newSingleThreadExecutor();
 		initializeEngine();
 	}
@@ -67,7 +67,7 @@ public class StockfishEngine {
 	 */
 	public String getBestMove(String moveList) throws IOException {
 		sendCommand("position startpos moves " + moveList); // Set up the position with the given move list
-		sendCommand("go movetime 750"); // Search for the best move with a time limit [ADJUST THIS FOR DIFFICULTY]
+		sendCommand("go movetime 750"); // Search for the best move with a time limit //**[ADJUST THIS FOR DIFFICULTY!!!]**//
 		return waitForBestMove(); // Wait for and return the best move
 	}
 

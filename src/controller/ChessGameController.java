@@ -309,8 +309,9 @@ public class ChessGameController {
 	 * 
 	 * @return true if deserialization was successful, false otherwise.
 	 */
+	
 	@SuppressWarnings("unchecked")
-	private boolean deserializeGameState() {
+	private boolean deserializeGameState() throws IOException, ClassNotFoundException {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("chessgame_moves.sav"))) {
 			moveHistory = (List<Move>) in.readObject();
 			currentPlayer = (String) in.readObject();
@@ -322,7 +323,7 @@ public class ChessGameController {
 	}
 
 	/**
-	 * Applies the deserialized moves to the game model.
+	 * Applies the decrypted moves to the game model.
 	 */
 	private void applyMovesToModel() {
 		model = new Board();

@@ -42,30 +42,42 @@ public class Board implements Serializable {
 	}
 
 	/**
-	 * Initializes the pieces on the board.
+	 * Initializes the pieces on the chess board by placing pawns and major pieces for both colors.
+	 * Assumes a standard 8x8 chess board and that the board is initially empty.
 	 */
 	public void initPieces() {
-		String[] colors = { "Black", "White" };
-		for (int i = 0; i < 2; i++) {
-			String color = colors[i];
-			int pawnRow = color.equals("White") ? 6 : 1;
-			int majorRow = color.equals("White") ? 7 : 0;
+	    // Define the two colors used in chess
+	    String[] colors = { "Black", "White" };
 
-			// Place pawns
-			for (int j = 0; j < 8; j++) {
-				squares[j][pawnRow].setPiece(new Pawn(color));
-			}
+	    // Loop through each color to place the pieces
+	    for (int i = 0; i < 2; i++) {
+	        String color = colors[i]; // Current color being placed
+	        int pawnRow = color.equals("White") ? 6 : 1; // Determine row for pawns based on color
+	        int majorRow = color.equals("White") ? 7 : 0; // Determine row for major pieces based on color
 
-			// Place major pieces
-			squares[0][majorRow].setPiece(new Rook(color));
-			squares[7][majorRow].setPiece(new Rook(color));
-			squares[1][majorRow].setPiece(new Knight(color));
-			squares[6][majorRow].setPiece(new Knight(color));
-			squares[2][majorRow].setPiece(new Bishop(color));
-			squares[5][majorRow].setPiece(new Bishop(color));
-			squares[3][majorRow].setPiece(new Queen(color));
-			squares[4][majorRow].setPiece(new King(color));
-		}
+	        // Place pawns in the appropriate row
+	        for (int j = 0; j < 8; j++) {
+	            squares[j][pawnRow].setPiece(new Pawn(color)); // Place a pawn at each square in the pawn row
+	        }
+
+	        // Place rooks in the corners of the major row
+	        squares[0][majorRow].setPiece(new Rook(color)); // Place a rook in the left corner
+	        squares[7][majorRow].setPiece(new Rook(color)); // Place a rook in the right corner
+
+	        // Place knights next to the rooks
+	        squares[1][majorRow].setPiece(new Knight(color)); // Place a knight next to the left rook
+	        squares[6][majorRow].setPiece(new Knight(color)); // Place a knight next to the right rook
+
+	        // Place bishops next to the knights
+	        squares[2][majorRow].setPiece(new Bishop(color)); // Place a bishop next to the left knight
+	        squares[5][majorRow].setPiece(new Bishop(color)); // Place a bishop next to the right knight
+
+	        // Place the queen on its color's square
+	        squares[3][majorRow].setPiece(new Queen(color)); // Place the queen on the board
+
+	        // Place the king next to the queen
+	        squares[4][majorRow].setPiece(new King(color)); // Place the king next to the queen
+	    }
 	}
 
 	/**
