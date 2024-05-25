@@ -26,7 +26,7 @@ Version 0.95 // Code created and stored on local machine in May, 2024
  // possible future feature implementation:
 - correcting chess engine GUI functionality for castling in both cases (short & long castling)
 - correcting chess engine functionality for loaded games (will be difficult to implement since the move list array from the loaded game will have to be passed into the running program to update expected location of pieces from default)
-- Change the terminal output for selected square to match standard chess syntex (lettered rows, numbered columns) 
+- Change the terminal output for selected square to match standard chess syntax (lettered rows, numbered columns) 
 
 ## ULM Diagram
 ![FuturamaChessULMDiagram](https://github.com/owensrj/FuturamaChess/assets/143543407/4dc75bc6-7af8-4f7e-af15-eeaa2a142e9f)
