@@ -29,7 +29,7 @@ Version 0.95 // Code created and stored on local machine in May, 2024
 - Change the terminal output for selected square to match standard chess syntex (lettered rows, numbered columns) 
 
 ## ULM Diagram
-https://lucid.app/publicSegments/view/c613ae82-60af-4d19-b1a2-d2839bf1c30e/image.jpeg
+![FuturamaChessULMDiagram](https://github.com/owensrj/FuturamaChess/assets/143543407/4dc75bc6-7af8-4f7e-af15-eeaa2a142e9f)
 
 
 ## Requirements Traceability Matrix
