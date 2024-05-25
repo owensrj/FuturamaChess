@@ -2,8 +2,8 @@
 # Table of Contents: 
 [Introduction](https://github.com/owensrj/FuturamaChess/blob/main/README.md#introduction)   
 [Updates](https://github.com/owensrj/FuturamaChess/blob/main/README.md#weekly-updates)  
-[ULM Diagram](https://github.com/jordankelley123/Cheap-Air-Travel-Application/blob/main/README.md#ulm-diagram)   
-[Requirements Traceability Matrix](https://github.com/jordankelley123/Cheap-Air-Travel-Application/blob/main/README.md#requirements-traceability-matrix)  
+[ULM Diagram](https://github.com/owensrj/FuturamaChess/blob/main/README.md#ulm-diagram)   
+[GUI Updates](https://github.com/owensrj/FuturamaChess/blob/main/README.md#GUI-updates)  
 
 ## Introduction: 
 My goal with this project is to transform very basic chess engine that I programmed in the past (which lacked many features, like friendly-fire prevention) into a Futurama-themed Chess GUI that features not only local multiplayer, but single player functionality with a chess engine. In addition to adding graphics and integrating a chess engine API that will require multi-threading, I will add a feature to save and load the game to demonstrate file I/O capability.
@@ -32,5 +32,18 @@ Version 0.95 // Code created and stored on local machine in May, 2024
 ![FuturamaChessULMDiagram](https://github.com/owensrj/FuturamaChess/assets/143543407/4dc75bc6-7af8-4f7e-af15-eeaa2a142e9f)
 
 
-## Requirements Traceability Matrix
-![Screenshot 2024-04-28 at 8 28 23 AM](https://github.com/jordankelley123/Cheap-Air-Travel-Application/assets/142934283/3e60760e-1294-4b42-b03b-5b8eaa586f53)
+## GUI updates
+Screenshot of my starting point - Very basic GUI developed during Intro To java that lacked many features, including animated chess pieces:
+![ChessStartingpoint](https://github.com/owensrj/FuturamaChess/assets/143543407/f352b94d-4e62-47b8-be73-4077c2a3a3f1)
+
+Futurama Chess board after implementing characters by creating a hash map that converted the string representation into an image, and then associating the piece key of the image file to the piece I wanted to replace:
+![futuramachess](https://github.com/owensrj/FuturamaChess/assets/143543407/2e5b12d2-a3db-45e4-8976-4a00a49311c4)
+
+Save game pop-up window implemented:
+![futuramachess2](https://github.com/owensrj/FuturamaChess/assets/143543407/58828bb6-6625-4bd5-bfee-b1313d26a805)
+
+Load Game pop-up window implemented:
+![futuramachess3](https://github.com/owensrj/FuturamaChess/assets/143543407/141c43ef-206d-4ffa-ba14-eec2f0c17bf3)
+
+Launcher window implemented to allow for selecting between game modes:
+![futuramachessLauncher](https://github.com/owensrj/FuturamaChess/assets/143543407/f3bd1c44-7f04-4c1f-8da2-47eeb750acc3)
