@@ -46,4 +46,5 @@ Load Game pop-up window implemented:
 ![futuramachess3](https://github.com/owensrj/FuturamaChess/assets/143543407/141c43ef-206d-4ffa-ba14-eec2f0c17bf3)
 
 Launcher window implemented to allow for selecting between game modes:
+
 ![futuramachessLauncher](https://github.com/owensrj/FuturamaChess/assets/143543407/f3bd1c44-7f04-4c1f-8da2-47eeb750acc3)
