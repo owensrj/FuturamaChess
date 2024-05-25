@@ -29,7 +29,7 @@ Version 0.95 // Code created and stored on local machine in May, 2024
 - Change the terminal output for selected square to match standard chess syntex (lettered rows, numbered columns) 
 
 ## ULM Diagram
-<div style="width: 960px; height: 720px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:960px; height:720px" src="https://lucid.app/documents/embedded/52ff1899-40b6-47f5-a791-8d7bbcfc8ef4" id="rY6EZSvar.XH"></iframe></div>
+<div style="width: 640px; height: 480px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:640px; height:480px" src="https://lucid.app/documents/embedded/52ff1899-40b6-47f5-a791-8d7bbcfc8ef4" id="oZ6E~5e6IJ4A"></iframe></div>
 
 
 ## Requirements Traceability Matrix
