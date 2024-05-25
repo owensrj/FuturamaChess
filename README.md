@@ -6,7 +6,7 @@
 [GUI Updates](https://github.com/owensrj/FuturamaChess/blob/main/README.md#GUI-updates)  
 
 ## Introduction: 
-My goal with this project is to transform very basic chess engine that I programmed in the past (which lacked many features, like friendly-fire prevention) into a Futurama-themed Chess GUI that features not only local multiplayer, but single player functionality with a chess engine. In addition to adding graphics and integrating a chess engine API that will require multi-threading, I will add a feature to save and load the game to demonstrate file I/O capability.
+My goal with this project is to transform a basic chess game that I programmed in Intro to Java (which lacked many features, like piece animations and rules like friendly-fire prevention) into a more accurately represented Futurama-themed Chess GUI that features not only local multiplayer, but single player functionality with the Stockfish chess engine. In addition to adding graphics and integrating a chess engine API, I will add a feature to save and load the game to demonstrate file I/O capability.
 
 ## Updates:
  Version 0.5 // code created and stored on a local machine in March, 2024
