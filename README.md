@@ -2,7 +2,7 @@
 # Table of Contents: 
 [Introduction](https://github.com/owensrj/FuturamaChess/blob/main/README.md#introduction)   
 [Updates](https://github.com/owensrj/FuturamaChess/blob/main/README.md#weekly-updates)  
-[ULM Diagram](https://github.com/owensrj/FuturamaChess/blob/main/README.md#ulm-diagram)   
+[UML Diagram](https://github.com/owensrj/FuturamaChess/blob/main/README.md#ulm-diagram)   
 [GUI Updates](https://github.com/owensrj/FuturamaChess/blob/main/README.md#GUI-updates)  
 
 ## Introduction: 
@@ -35,7 +35,7 @@ Version 0.95 // Code created and stored on local machine in May, 2024
 - correcting chess engine functionality for loaded games (will be difficult to implement since the move list array from the loaded game will have to be passed into the running program to update expected location of pieces from default)
 - Change the terminal output for selected square to match standard chess syntax (lettered rows, numbered columns) 
 
-## ULM Diagram
+## UML Diagram
 ![FuturamaChessULMDiagram](https://github.com/owensrj/FuturamaChess/assets/143543407/4dc75bc6-7af8-4f7e-af15-eeaa2a142e9f)
 
 
